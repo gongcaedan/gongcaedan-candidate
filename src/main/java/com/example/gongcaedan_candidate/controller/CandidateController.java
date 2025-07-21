@@ -5,6 +5,9 @@ import com.example.gongcaedan_candidate.repository.CandidateRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
+import com.example.gongcaedan_candidate.dto.CandidateResponseDto;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
@@ -21,8 +24,10 @@ public class CandidateController {
     }
 
     @PostMapping
-    public Candidate createCandidate(@RequestBody Candidate candidate) {
-        candidate.setCreatedAt(LocalDateTime.now()); // 생성일 자동 설정
-        return candidateRepository.save(candidate);
+    public ResponseEntity<CandidateResponseDto> createCandidate(@RequestBody Candidate candidate) {
+        candidate.setCreatedAt(LocalDateTime.now());
+        Candidate saved = candidateRepository.save(candidate);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(new CandidateResponseDto(saved));
     }
 }
