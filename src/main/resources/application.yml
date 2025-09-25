@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: candidate
   config:
     import: optional:file:.env[.properties]  # ✅ dotenv 자동 로드
   datasource:
