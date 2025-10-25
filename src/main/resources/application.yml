@@ -19,6 +19,10 @@ eureka:
   client:
     service-url:
       defaultZone: http://eurekaserver:8761/eureka
+  instance:
+    prefer-ip-address: false
+    hostname: candidate
+    instance-id: ${spring.application.name}:${server.port}
 
 management:
   endpoint:
